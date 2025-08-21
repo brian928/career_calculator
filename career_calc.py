@@ -40,7 +40,7 @@ def find_break_even(earningsA, earningsB):
 careerA = {
     "name": "Food Scientist Master's Degree",
     "college_years": 2,
-    "college_cost_per_year": 5000,
+    "college_cost_per_year": 0,
     "starting_salary": 70000,
     "annual_raise": 0.03,   # 3%
     "working_years": 43
@@ -50,9 +50,18 @@ careerB = {
     "name": "Pharmacist Doctorate Degree",
     "college_years": 4,
     "college_cost_per_year": 25000,
-    "starting_salary": 100000,
+    "starting_salary": 120000,
     "annual_raise": 0.03,    # 3%
     "working_years": 41
+}
+
+careerC = {
+    "name": "MLS Degree",
+    "college_years": 2,
+    "college_cost_per_year": 12000,
+    "starting_salary": 60000,
+    "annual_raise": 0.03,    # 3%
+    "working_years": 43
 }
 
 # Run projections
@@ -66,6 +75,10 @@ earningsB = career_projection(
     careerB["starting_salary"], careerB["annual_raise"], careerB["working_years"]
 )
 
+earningsC = career_projection(
+    careerC["college_years"], careerC["college_cost_per_year"],
+    careerC["starting_salary"], careerC["annual_raise"], careerC["working_years"]
+)
 # Find break-even point
 break_even = find_break_even(earningsA, earningsB)
 
@@ -73,6 +86,7 @@ break_even = find_break_even(earningsA, earningsB)
 print("\n===== Career Earnings Summary =====")
 print(f"{careerA['name']}: Final Net Earnings = ${earningsA[-1]:,.0f}")
 print(f"{careerB['name']}: Final Net Earnings = ${earningsB[-1]:,.0f}")
+print(f"{careerC['name']}: Final Net Earnings = ${earningsC[-1]:,.0f}")
 if break_even:
     year, value = break_even
     print(f"Break-even: {careerB['name']} surpasses {careerA['name']} in Year {year} (Net: ${value:,.0f})")
@@ -83,6 +97,7 @@ else:
 plt.figure(figsize=(10,6))
 plt.plot(earningsA, label=f"{careerA['name']}", linewidth=2)
 plt.plot(earningsB, label=f"{careerB['name']}", linewidth=2)
+plt.plot(earningsC, label=f"{careerC['name']}", linewidth=2)
 
 # Mark break-even if it exists
 if break_even:
